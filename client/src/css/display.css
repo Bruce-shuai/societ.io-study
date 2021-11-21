@@ -1,0 +1,12 @@
+.display-container {
+  width: 35em;
+  height: 35em;
+  border: 2px solid black;
+}
+
+.message-item {
+  padding: 0.4em;
+  color: white;
+  background-color: grey;
+  border-bottom: 1px solid black;
+}

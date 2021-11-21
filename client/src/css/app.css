@@ -1,0 +1,10 @@
+@import "./display.css";
+@import "./form.css";
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
