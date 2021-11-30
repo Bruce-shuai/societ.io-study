@@ -32,6 +32,7 @@ function App() {
   })
 
   function sendRoom(newRoom) {
+    socket.emit('join-room', newRoom)
     setRoom(newRoom)
   }
 

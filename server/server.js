@@ -1,8 +1,14 @@
+const { instrument } = require("@socket.io/admin-ui");
+
 const io = require('socket.io')(3004, {
   cors: {
-    origin: ['http://localhost:3001'],   // 允许本机的3000端口进行访问
+    origin: ["http://localhost:3001", "https://admin.socket.io"],   // 允许本机的3000端口进行访问
   }
 })
+
+// const userIo = io.of('/user')
+
+
 
 io.on('connection', socket => {
   // const id = socket.handshake.query.id 我们可以自己创建一个id 然后在服务端通过特殊手段将id传给handshake.query.id
@@ -19,5 +25,13 @@ io.on('connection', socket => {
       socket.to(room).emit('receive-message', message);
     }
   })
+
+  // 加入群聊功能
+  socket.on('join-room', room => {
+    socket.join(room)
+  })
 })
 
+instrument(io, {
+  auth: false
+});
