@@ -6,6 +6,11 @@ const io = require('socket.io')(3004, {
   }
 })
 
+const userIo = io.of('/user')
+userIo.on('connection', socket => {
+  console.log('connected to user namespace');
+})
+
 io.on('connection', socket => {
   // TODO
   const id = socket.handshake.query.id;
