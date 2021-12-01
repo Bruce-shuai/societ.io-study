@@ -17,6 +17,13 @@ io.on('connection', socket => {
       socket.to(room).emit('receive-message', message);   
     }
   })
+
+
+  // 注意：io.on 是发给所有用户的  socket.on 是发给限定用户的   
+  socket.on("join-room", (room, cb) => {
+    socket.join(room);
+    cb(`哈哈哈，你加入的房间号是：${room}`);
+  })
 })
 
 instrument(io, {
