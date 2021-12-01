@@ -8,8 +8,22 @@ const io = require('socket.io')(3004, {
 
 const userIo = io.of('/user')
 userIo.on('connection', socket => {
-  console.log('connected to user namespace');
+  console.log('connected to user namespace with username' + socket.username);
 })
+
+userIo.use((socket, next) => {  // next表示下一个middleware，如果我们调用next() 表示我们当前的进展一切ok，如果无法进入则出现error
+  if (socket.handshake.auth.token) {
+    socket.username = getUsernameFromToken(socket.handshake.auth.token)
+    next();   // 成功匹配
+  } else {
+    next(new Error('Please Send Token')) // 匹配失败
+  }
+})
+
+function getUsernameFromToken(token) {
+  return token;
+}
+
 
 io.on('connection', socket => {
   // TODO
